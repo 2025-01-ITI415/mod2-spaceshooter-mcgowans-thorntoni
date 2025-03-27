@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;   // Enables the loading & reloading of scenes
+using UnityEngine.SceneManagement;
+using TMPro;   // Enables the loading & reloading of scenes
 
 [RequireComponent(typeof(BoundsCheck))]
 public class Main : MonoBehaviour
@@ -12,16 +13,23 @@ public class Main : MonoBehaviour
 
     [Header("Inscribed")]
     public bool spawnEnemies = true;
-    public GameObject[] prefabEnemies;               // Array of Enemy prefabs
+    public GameObject[] prefabEnemies;         // Array of Enemy prefabs
+    public GameObject prefabEnemy4;              
     public float enemySpawnPerSecond = 0.5f;  // # Enemies spawned/second
     public float enemyInsetDefault = 1.5f;    // Inset from the sides
     public float gameRestartDelay = 2.0f;
     public GameObject prefabPowerUp;
     public WeaponDefinition[] weaponDefinitions;
+
+
     public eWeaponType[] powerUpFrequency = new eWeaponType[] {        
                                      eWeaponType.blaster, eWeaponType.blaster,
                                      eWeaponType.spread,  eWeaponType.shield };
     private BoundsCheck bndCheck;
+
+    private int Enemy0Deaths = 0;
+
+    public TMP_Text deathCounterText;
 
     void Awake()
     {
@@ -31,7 +39,8 @@ public class Main : MonoBehaviour
         bndCheck = GetComponent<BoundsCheck>();
 
         // Invoke SpawnEnemy() once (in 2 seconds, based on default values)
-        Invoke(nameof(SpawnEnemy), 1f / enemySpawnPerSecond);                // a
+        Invoke(nameof(SpawnEnemy), 1f / enemySpawnPerSecond);
+                        // a
 
         // A generic Dictionary with eWeaponType as the key
         WEAP_DICT = new Dictionary<eWeaponType, WeaponDefinition>();          // a
@@ -51,6 +60,12 @@ public class Main : MonoBehaviour
             return;
         }
 
+        if (Enemy0Deaths >= 10)
+        {
+            SpawnEnemy4();
+            spawnEnemies = false;
+            return;
+        }
         // Pick a random Enemy prefab to instantiate
         int ndx = Random.Range(0, prefabEnemies.Length);                     // b
         GameObject go = Instantiate<GameObject>(prefabEnemies[ndx]);     // c
@@ -73,6 +88,28 @@ public class Main : MonoBehaviour
         Invoke(nameof(SpawnEnemy), 1f / enemySpawnPerSecond);                // g
     }
 
+    void SpawnEnemy4(){
+        GameObject go = Instantiate(prefabEnemy4);
+
+        float xPos = 0;
+        Vector3 pos = new Vector3 (xPos, bndCheck.camHeight, 0);
+        go.transform.position = pos;
+    }
+
+    public void Enemy0Death(){
+        Enemy0Deaths++;
+        UpdateDeathCounterUI();
+    }
+
+    private void UpdateDeathCounterUI(){
+        deathCounterText.text = "Score: " + Enemy0Deaths.ToString();
+    }
+
+    public void Enemy4Defeated(){
+        Enemy0Deaths = 0;
+        spawnEnemies = true;
+        Invoke(nameof(SpawnEnemy), 1f / enemySpawnPerSecond);
+    }
     void DelayedRestart()
     {                                                   // c
                                                         // Invoke the Restart() method in gameRestartDelay seconds
@@ -117,6 +154,11 @@ public class Main : MonoBehaviour
     /// <param name="e"The Enemy that was destroyed</param
     static public void SHIP_DESTROYED(Enemy e)
     {
+        if (e is Enemy_0)
+        {
+            S.Enemy0Death();
+        }
+        
         // Potentially generate a PowerUp
         if (Random.value <= e.powerUpDropChance)
         { // Underlined red for now  // c
