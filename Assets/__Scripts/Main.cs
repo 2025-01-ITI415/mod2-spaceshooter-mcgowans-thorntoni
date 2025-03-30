@@ -88,11 +88,18 @@ public class Main : MonoBehaviour
         Invoke(nameof(SpawnEnemy), 1f / enemySpawnPerSecond);                // g
     }
 
-    void SpawnEnemy4(){
+    void SpawnEnemy4() {
         GameObject go = Instantiate(prefabEnemy4);
 
-        float xPos = 0;
-        Vector3 pos = new Vector3 (xPos, bndCheck.camHeight, 0);
+        Enemy_4 enemy4 = go.GetComponent<Enemy_4>();
+
+        if (enemy4 != null)
+        {
+            enemy4.health = 150f;
+            enemy4.movementSpeed = 8f;
+        }
+        
+        Vector3 pos = new Vector3(0, bndCheck.camHeight, 0);
         go.transform.position = pos;
     }
 

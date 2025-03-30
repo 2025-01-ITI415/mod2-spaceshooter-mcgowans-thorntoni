@@ -10,17 +10,17 @@ public class Enemy : MonoBehaviour
     [Header("Inscribed")]
     public float speed = 10f;   // The movement speed is 10m/s
     public float fireRate = 0.3f;  // Seconds/shot (Unused)
-    public float health = 10;    // Damage needed to destroy this enemy
+    public float health = 10;   // Damage needed to destroy this enemy
     public int score = 100;   // Points earned for destroying this
     public float powerUpDropChance = 1f;
 
 
-    // private BoundsCheck bndCheck;                                             // b
+    // private BoundsCheck bndCheck;                                         	// b
     protected BoundsCheck bndCheck;
     protected bool calledShipDestroyed = false;
 
     void Awake()
-    {                                                            // c
+    {                                                           // c
         bndCheck = GetComponent<BoundsCheck>();
     }
 
@@ -64,10 +64,10 @@ public class Enemy : MonoBehaviour
         // Check for collisions with ProjectileHero
         ProjectileHero p = otherGO.GetComponent<ProjectileHero>();
         if (p != null)
-        {                                                  
+        {
             // Only damage this Enemy if it’s on screen
             if (bndCheck.isOnScreen)
-            {                                      
+            {
                 // Get the damage amount from the Main WEAP_DICT.
                 health -= Main.GET_WEAPON_DEFINITION(p.type).damageOnHit;
                 if (health <= 0)
