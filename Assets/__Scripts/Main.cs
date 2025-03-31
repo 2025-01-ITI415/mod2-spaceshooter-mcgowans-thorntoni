@@ -96,7 +96,7 @@ public class Main : MonoBehaviour
         if (enemy4 != null)
         {
             enemy4.health = 150f;
-            enemy4.movementSpeed = 8f;
+            enemy4.movementSpeed = 0.1f;
         }
         
         Vector3 pos = new Vector3(0, bndCheck.camHeight, 0);

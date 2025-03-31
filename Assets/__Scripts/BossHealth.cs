@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI; // Don't forget this for using UI elements like sliders.
+using UnityEngine.UI; 
 
 public class UI : MonoBehaviour
 {

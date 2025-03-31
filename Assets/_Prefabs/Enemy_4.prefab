@@ -115,8 +115,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c2c87ff8edf749f78faf2b61435d6c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 20
-  movementSpeed: 0.0005
+  speed: 0.1
+  fireRate: 0.3
+  health: 50
+  score: 1000
+  powerUpDropChance: 1
 --- !u!114 &-5834237933516866095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,6 +242,15 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0124bc53210bf6d488148eb27b996322, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6834713296095828335}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0124bc53210bf6d488148eb27b996322, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2521661635104239635}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0124bc53210bf6d488148eb27b996322, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2138456544946831631}
     - targetCorrespondingSourceObject: {fileID: 8295467761443496062, guid: 0124bc53210bf6d488148eb27b996322, type: 3}
       insertIndex: -1
       addedObject: {fileID: 9185519999970266969}
@@ -303,6 +315,68 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -5058095349073789047, guid: 0124bc53210bf6d488148eb27b996322, type: 3}
+--- !u!1 &8338674280845046275 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 0124bc53210bf6d488148eb27b996322, type: 3}
+  m_PrefabInstance: {fileID: 9185519999970266962}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6834713296095828335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8338674280845046275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c2c87ff8edf749f78faf2b61435d6c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
+  fireRate: 0.3
+  health: 20
+  score: 100
+  powerUpDropChance: 1
+--- !u!114 &2521661635104239635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8338674280845046275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1a8e3f849e734f8dbadc59249f453b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boundsType: 0
+  radius: 1
+  keepOnScreen: 1
+  screenLocs: 0
+  camWidth: 0
+  camHeight: 0
+--- !u!114 &2138456544946831631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8338674280845046275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21038221e5a2246ed83726e486449c79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnEnemies: 1
+  prefabEnemies: []
+  prefabEnemy4: {fileID: 0}
+  enemySpawnPerSecond: 0.5
+  enemyInsetDefault: 1.5
+  gameRestartDelay: 2
+  prefabPowerUp: {fileID: 0}
+  weaponDefinitions: []
+  powerUpFrequency: 01000000010000000200000006000000
+  deathCounterText: {fileID: 0}
 --- !u!4 &8715376467510569145 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0124bc53210bf6d488148eb27b996322, type: 3}
